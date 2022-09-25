@@ -1,17 +1,22 @@
-version: "2"
+version: "3.3"
+
 services:
-  app:
-    container_name: afs
-    restart: always
-    build: .
-    ports:
-      - "3000:3000"
-    links:
-      - mongo
-  mongo:
-    container_name: mongo
-    image: mongo
-    volumes:
-      - ./data:/data/db
-    ports:
-      - "27017:27017"
+    server:
+      build:
+        context: .
+      ports:
+        - "5000:5000"
+      depends_on:
+        - mongo
+
+    mongo:
+      image: mongo:4.4
+      env_file: ./.env
+      ports: 
+        - 27017:27017
+      environment:
+        - MONGO-INITDB_ROOT_USERNAME=$MONGO_USERNAME
+        - MONGO-INITDB_ROOT_PASSWORD=$MONGO_PASSWORD
+      stdin_open: true
+
+ 
