@@ -5,7 +5,7 @@ services:
       build:
         context: .
       ports:
-        - "5000:5000"
+        - "3000:3000"
       depends_on:
         - mongo
 
@@ -17,6 +17,4 @@ services:
       environment:
         - MONGO-INITDB_ROOT_USERNAME=$MONGO_USERNAME
         - MONGO-INITDB_ROOT_PASSWORD=$MONGO_PASSWORD
-      stdin_open: true
-
- 
+      stdin_open: true 
